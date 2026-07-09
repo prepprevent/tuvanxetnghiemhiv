@@ -5,7 +5,7 @@
   <title>Công cụ tổng hợp báo cáo TVXN</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Thư viện đọc Excel SheetJS -->
+  <!-- Thư viện đọc Excel -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 
@@ -14,12 +14,26 @@
     <h1>Công cụ tổng hợp số liệu báo cáo TVXN</h1>
 
     <div class="box">
-      <label><strong>1. Chọn file Excel dữ liệu</strong></label>
+      <label><strong>1. Chọn file Excel dữ liệu</strong></label><br>
       <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
     </div>
 
     <div class="box">
-      <label><strong>2. Chọn kỳ báo cáo</strong></label>
+      <label><strong>2. Chọn sheet dữ liệu</strong></label><br>
+      <select id="sheetSelect">
+        <option value="">-- Chọn sheet --</option>
+      </select>
+    </div>
+
+    <div class="box">
+      <label><strong>3. Chọn cột kỳ báo cáo</strong></label><br>
+      <select id="periodColumnSelect">
+        <option value="">-- Chọn cột kỳ báo cáo --</option>
+      </select>
+    </div>
+
+    <div class="box">
+      <label><strong>4. Chọn kỳ báo cáo</strong></label><br>
       <select id="periodSelect">
         <option value="">-- Chọn kỳ báo cáo --</option>
       </select>
@@ -33,7 +47,7 @@
     <h2>Kết quả tổng hợp</h2>
     <div id="summary"></div>
 
-    <h2>Dữ liệu đã đọc</h2>
+    <h2>Xem trước dữ liệu</h2>
     <div id="preview"></div>
   </div>
 
