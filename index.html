@@ -1,56 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Công cụ tổng hợp báo cáo TVXN</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Công cụ tổng hợp số liệu báo cáo TVXN</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Thư viện đọc Excel -->
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
-
 <body>
-  <div class="container">
-    <h1>Công cụ tổng hợp số liệu báo cáo TVXN</h1>
-
-    <div class="box">
-      <label><strong>1. Chọn file Excel dữ liệu</strong></label><br>
-      <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">TVXN HIV · GitHub Pages</p>
+      <h1>Công cụ tổng hợp số liệu báo cáo TVXN</h1>
+      <p class="subtitle">Import file dữ liệu KP eLog, chọn kỳ báo cáo, tự động tổng hợp chỉ số và xuất Excel.</p>
     </div>
+  </header>
 
-    <div class="box">
-      <label><strong>2. Chọn sheet dữ liệu</strong></label><br>
-      <select id="sheetSelect">
-        <option value="">-- Chọn sheet --</option>
-      </select>
-    </div>
+  <main class="container">
+    <section class="card upload-card">
+      <div class="card-title-row">
+        <div>
+          <h2>1. Import data</h2>
+          <p>Chọn một hoặc nhiều file Excel xuất từ KP eLog. Mỗi file cần có các sheet: <b>DANH SACH KHACH HANG</b>, <b>KHACH HANG CHI DAN</b>, <b>BAN TINH - BAN CHICH</b>.</p>
+        </div>
+        <span class="badge">Dữ liệu xử lý trên trình duyệt</span>
+      </div>
 
-    <div class="box">
-      <label><strong>3. Chọn cột kỳ báo cáo</strong></label><br>
-      <select id="periodColumnSelect">
-        <option value="">-- Chọn cột kỳ báo cáo --</option>
-      </select>
-    </div>
+      <label id="dropZone" class="drop-zone" for="fileInput">
+        <input id="fileInput" type="file" accept=".xlsx,.xls" multiple />
+        <span class="drop-icon">⬆</span>
+        <strong>Kéo thả file vào đây hoặc bấm để chọn file</strong>
+        <small>Không upload dữ liệu lên máy chủ; toàn bộ chạy bằng JavaScript trên máy người dùng.</small>
+      </label>
 
-    <div class="box">
-      <label><strong>4. Chọn kỳ báo cáo</strong></label><br>
-      <select id="periodSelect">
-        <option value="">-- Chọn kỳ báo cáo --</option>
-      </select>
-    </div>
+      <div id="fileList" class="file-list muted">Chưa chọn file.</div>
+    </section>
 
-    <div class="box">
-      <button onclick="renderReport()">Xem kết quả</button>
-      <button onclick="exportExcel()">Tải kết quả Excel</button>
-    </div>
+    <section class="card control-card">
+      <h2>2. Chọn kỳ báo cáo</h2>
+      <div class="controls">
+        <label>
+          Kỳ báo cáo
+          <select id="periodSelect" disabled>
+            <option value="">Chưa có dữ liệu</option>
+          </select>
+        </label>
+        <button id="runBtn" type="button" disabled>Chạy tổng hợp</button>
+        <button id="downloadBtn" type="button" class="secondary" disabled>Tải kết quả Excel</button>
+      </div>
+      <div id="status" class="status muted">Hãy import file data trước.</div>
+    </section>
 
-    <h2>Kết quả tổng hợp</h2>
-    <div id="summary"></div>
+    <section id="summarySection" class="card hidden">
+      <div class="card-title-row">
+        <div>
+          <h2>3. Kết quả tổng hợp</h2>
+          <p id="summaryMeta" class="muted"></p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="summaryTable"></table>
+      </div>
+    </section>
 
-    <h2>Xem trước dữ liệu</h2>
-    <div id="preview"></div>
-  </div>
+    <section id="detailSection" class="grid hidden">
+      <article class="card">
+        <h2>Danh sách CGTC_EPIC</h2>
+        <p class="muted">Danh sách ca dương tính mới được kết nối điều trị thành công trong kỳ báo cáo.</p>
+        <div class="table-wrap compact"><table id="cgtcEpicTable"></table></div>
+      </article>
+      <article class="card">
+        <h2>Danh sách CGTC_LIFE</h2>
+        <p class="muted">Danh sách ca thuộc chỉ số CGTC_LIFE trong kỳ báo cáo.</p>
+        <div class="table-wrap compact"><table id="cgtcLifeTable"></table></div>
+      </article>
+    </section>
+  </main>
 
+  <footer class="app-footer">
+    <p>Phiên bản web chuyển đổi từ Power Query của file “Công cụ tổng hợp số liệu báo cáo TVXN_v2.0.xlsx”.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
