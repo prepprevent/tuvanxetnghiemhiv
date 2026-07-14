@@ -34,6 +34,8 @@ const SUMMARY_ROWS = [
   { section: 'NHÓM CHỈ SỐ THEO DÕI CHƯƠNG TRÌNH' },
   { key: 'XNKD_BHYT', attribute: 'XNKD_BHYT', group: 'Payment', label: 'Confirmation_BHYT', desc: 'Số ca xét nghiệm khẳng định trong tháng nguồn BHYT', totalOnly: true, source: 'TVXN' },
   { key: 'TT_Test', attribute: 'TT_Test', group: 'Payment', label: 'TT_Test', desc: 'Số ca xét nghiệm sàng lọc trong tháng', totalOnly: true, source: 'TVXN' },
+  { key: 'XNKD', attribute: 'XNKD', group: 'Payment', label: 'Confirmation_ALL', desc: 'Số ca xét nghiệm khẳng định trong tháng tất cả các nguồn', totalOnly: true, source: 'TVXN' },
+
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -380,17 +382,15 @@ function processTvxn(rows, khcdByGuid, btbcByMaSoXN) {
     else if (screeningResult === 2 && agreeContinue === 1 && confirmResult === 3) testResult = 'Unknown';
 
     const funded = fundFinal === 'EPIC' || fundFinal === 'BHYT';
-    const htsTst = (
-      funded && caLapLaiXn !== 1 && testResult === 'Negative' && firstTester === 1
-    ) || (
-      funded && caDuongCu !== 1 && testResult === 'Positive' && firstTester === 1
-    ) ? 1 : null;
+    const htsTst = (funded && caLapLaiXn !== 1 && testResult === 'Negative' && firstTester === 1 ) || 
+      (funded && caDuongCu !== 1 && testResult === 'Positive' && firstTester === 1 ) ? 1 : null;
 
     const khcd = khcdByGuid.get(guid);
     const indexOffered = isNonEmpty(get(row, 'Ngày thực hiện tư vấn BT/BC')) && funded ? 1 : null;
     const indexAccepted = indexOffered === 1 && khcd && khcd.Index_accepted === 1 && funded ? 1 : null;
 
     const xnkdep = isNonEmpty(screeningResult) && confirmType === 3 && fundFinal === 'EPIC' ? 1 : null;
+    const xnkd = isNonEmpty(screeningResult) && confirmType === 3 ? 1 : null;
     const xnkdbhyt = testResult !== null && confirmType === 3 && fundFinal === 'BHYT' ? 1 : null;
 
     const ttTest = (maKh.startsWith('HCM') && prepGroup !== 1 && isNonEmpty(screeningDone))
@@ -427,6 +427,7 @@ function processTvxn(rows, khcdByGuid, btbcByMaSoXN) {
       Index_offered: indexOffered,
       Index_accepted: indexAccepted,
       XNKD_EPIC: xnkdep,
+      XNKD : xnkd,
       XNKD_BHYT: xnkdbhyt,
       TT_Test: ttTest,
     };
