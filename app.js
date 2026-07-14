@@ -1,9 +1,3 @@
-/*
-  Công cụ tổng hợp số liệu báo cáo TVXN
-  Chuyển logic Power Query từ file Excel sang JavaScript chạy trên GitHub Pages.
-  Cần nạp SheetJS trong index.html trước file này.
-*/
-
 'use strict';
 
 const APP = {
