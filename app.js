@@ -432,7 +432,7 @@ function processTvxn(rows, khcdByGuid, btbcByMaSoXN) {
       TT_Test: ttTest,
     };
 
-    const indicatorNames = ['HTS_TST', 'HTS_TST_NEG', 'HTS_TST_POS', 'HTS_SELF', 'CGTC', 'CGTC_LIFE', 'Index_offered', 'Index_accepted', 'XNKD_EPIC', 'XNKD_BHYT', 'TT_Test'];
+    const indicatorNames = ['HTS_TST', 'HTS_TST_NEG', 'HTS_TST_POS', 'HTS_SELF', 'CGTC', 'CGTC_LIFE', 'Index_offered', 'Index_accepted', 'XNKD_EPIC',  'XNKD', 'XNKD_BHYT', 'TT_Test'];
     indicatorNames.forEach((attribute) => {
       if (enriched[attribute] !== 1) return;
       const reportingDate = reportingDateForTvxn(attribute, row, enriched);
