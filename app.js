@@ -32,9 +32,9 @@ const SUMMARY_ROWS = [
   { key: 'XNKD_EPIC', attribute: 'XNKD_EPIC', group: 'Payment', label: 'Confirmation_EPIC', desc: 'Số ca xét nghiệm khẳng định trong tháng nguồn Dự án EpiC', totalOnly: true, source: 'TVXN' },
   { key: 'CGTC', attribute: 'CGTC', group: 'Payment', label: 'CGTC_EPIC', desc: 'Số ca dương tính mới được kết nối điều trị thành công trong tháng', totalOnly: true, source: 'TVXN' },
   { section: 'NHÓM CHỈ SỐ THEO DÕI CHƯƠNG TRÌNH' },
-  { key: 'XNKD_BHYT', attribute: 'XNKD_BHYT', group: 'Payment', label: 'Confirmation_BHYT', desc: 'Số ca xét nghiệm khẳng định trong tháng nguồn BHYT', totalOnly: true, source: 'TVXN' },
   { key: 'TT_Test', attribute: 'TT_Test', group: 'Payment', label: 'TT_Test', desc: 'Số ca xét nghiệm sàng lọc trong tháng', totalOnly: true, source: 'TVXN' },
   { key: 'XNKD', attribute: 'XNKD', group: 'Payment', label: 'Confirmation_ALL', desc: 'Số ca xét nghiệm khẳng định trong tháng tất cả các nguồn', totalOnly: true, source: 'TVXN' },
+  { key: 'XNKD_BHYT', attribute: 'XNKD_BHYT', group: 'Payment', label: 'Confirmation_BHYT', desc: 'Số ca xét nghiệm khẳng định trong tháng nguồn BHYT', totalOnly: true, source: 'TVXN' },
 
 ];
 
